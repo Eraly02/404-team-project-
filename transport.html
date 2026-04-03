@@ -1,36 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Транспорт</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Транспорт</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=b68d8508-f298-4f9d-bd1e-0c5a1146118f&lang=ru_RU"></script>
+
+<style>
+
+.card canvas {
+    width: 100% !important;
+    height: 250px !important;
+}
+
+
+.bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.bottom-grid .card {
+    height: 320px;
+}
+
+
+.empty {
+    background: transparent;
+    box-shadow: none;
+}
+
+
+#map {
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+}
+</style>
+
 </head>
+
 <body>
 
-<div class="container page">
 
-<h1>Almaty Monitoring</h1>
+<div class="sidebar">
+    <h2>Almaty Monitoring</h2>
 
-<div class="menu">
-<a href="dashboard.html">Главная</a>
-<a href="ecology.html">Экология</a>
-<a href="transport.html">Транспорт</a>
-<a href="feedback.html">Обратная связь</a>
+    <a href="dashboard.html">Главная</a>
+    <a href="ecology.html">Экология</a>
+    <a class="active" href="transport.html">Транспорт</a>
+    <a href="feedback.html">Обратная связь</a>
 </div>
 
-<h1>Дорожная ситуация</h1>
 
-<p>ДТП за сутки: <span id="dtp">124</span></p>
-<p>Пробки: <span id="traffic">4</span>/10</p>
-<p>Выбросы CO2: <span id="co2">860</span></p>
+<div class="main">
 
-<button onclick="updateData()">Обновить</button>
+    
+    <div class="header big-header">
+        <h1>Almaty Monitoring</h1>
+
+        <div class="user">
+            <div class="avatar"></div>
+            <div>
+                <div>Д.А.Сатыбалды</div>
+                <small>Личный кабинет</small>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="grid">
+
+        <div class="card blue center">
+            <p>ДТП за сутки</p>
+            <div class="big" id="dtp">124</div>
+        </div>
+
+        <div class="card green center">
+            <p>Пробки</p>
+            <div class="big"><span id="traffic">4</span>/10</div>
+        </div>
+
+        <div class="card orange center">
+            <p>Выбросы CO₂</p>
+            <div class="big"><span id="co2">860</span> тонн</div>
+        </div>
+
+    </div>
+
+    
+    <div class="bottom-grid">
+
+        <div class="card">
+            <h3>Загруженность дорог <span style="color:red;">68%</span></h3>
+            <canvas id="lineChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Аварийность на дорогах</h3>
+            <canvas id="pieChart"></canvas>
+        </div>
+
+
+    </div>
+
+   
+    <div class="card map">
+        <h3>Карта дорожной ситуации</h3>
+
+        <div id="map"></div>
+
+        <div class="legend">
+            <span class="dot green-dot"></span> Свободно
+            <span class="dot yellow-dot"></span> Умеренно
+            <span class="dot red-dot"></span> Пробки
+            <span class="dot black-dot"></span> Перекрыто
+        </div>
+    </div>
+
+</div>
 
 <script>
-function updateData() {
-    document.getElementById("dtp").innerText = Math.floor(Math.random() * 200);
-    document.getElementById("traffic").innerText = Math.floor(Math.random() * 10);
-    document.getElementById("co2").innerText = Math.floor(Math.random() * 1000);
-}
+
+new Chart(document.getElementById("lineChart"), {
+    type: 'line',
+    data: {
+        labels: ["00","04","08","12","16","20"],
+        datasets: [{
+            data: [30,20,40,68,55,45],
+            borderColor: "#5a54c4",
+            fill: false,
+            tension: 0.4
+        }]
+    },
+    options: {
+        maintainAspectRatio: false
+    }
+});
+
+
+new Chart(document.getElementById("pieChart"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Скорость","ПДД","Погода","Неисправности"],
+        datasets: [{
+            data: [42,28,18,12],
+            backgroundColor: ["#5a54c4","#ff9800","#f44336","#9e9e9e"]
+        }]
+    },
+    options: {
+        maintainAspectRatio: false
+    }
+});
+
+
+ymaps.ready(function () {
+
+    var map = new ymaps.Map("map", {
+        center: [43.238949, 76.889709],
+        zoom: 12
+    });
+
+    var traffic = new ymaps.control.TrafficControl({
+        state: { trafficShown: true }
+    });
+
+    map.controls.add(traffic);
+
+    map.geoObjects.add(
+        new ymaps.Placemark([43.25, 76.90], { balloonContent: 'ДТП' })
+    );
+
+    map.geoObjects.add(
+        new ymaps.Placemark([43.23, 76.88], { balloonContent: 'Пробка' })
+    );
+
+});
 </script>
 
 </body>

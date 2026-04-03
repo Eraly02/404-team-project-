@@ -1,45 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Экология</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Экология</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<div class="container page">
+<div class="sidebar">
+    <h2>Almaty Monitoring</h2>
 
-<h1>Almaty Monitoring</h1>
-
-<div class="menu">
-<a href="dashboard.html">Главная</a>
-<a href="ecology.html">Экология</a>
-<a href="transport.html">Транспорт</a>
-<a href="feedback.html">Обратная связь</a>
+    <a href="dashboard.html">Главная</a>
+    <a class="active" href="ecology.html">Экология</a>
+    <a href="transport.html">Транспорт</a>
+    <a href="feedback.html">Обратная связь</a>
 </div>
 
-<h1>Экология</h1>
+<div class="main">
 
-<p>Качество воды: <span id="water">78</span>%</p>
-<p>AQI: <span id="aqi">42</span></p>
-<p>Статус: <span id="status">Хороший</span></p>
+   
+    <div class="header big-header">
+        <h1>Экология города</h1>
 
-<button onclick="updateEco()">Обновить</button>
+        <div class="profile">
+            <div class="avatar"></div>
+            <div>
+                <div class="name">Д.А.Сатыбалды</div>
+                <div class="sub">Личный кабинет</div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="eco-grid">
+
+        
+        <div class="eco-card">
+            <h3>Качество воды</h3>
+
+            <div class="water-block">
+                💧 <span id="water">78</span>%
+            </div>
+
+            <div class="status good">Хорошее</div>
+
+            <div style="margin-top:15px; font-size:14px;">
+                <div>р. Есентай — <span class="bad">86%</span></div>
+                <div>р. Большая Алматинка — <span style="color:orange;">72%</span></div>
+                <div>р. Жарбылак — <span class="good">45%</span></div>
+            </div>
+        </div>
+
+      
+        <div class="eco-card">
+            <h3>Источники загрязнения</h3>
+            <canvas id="pieChart"></canvas>
+        </div>
+
+     
+        <div class="eco-card aqi">
+            <h3>Индекс качества воздуха (AQI)</h3>
+
+            <div class="aqi-value">
+                <span id="aqi">42</span>
+                <span class="good">Хороший</span>
+            </div>
+
+            <div class="change">-12% к вчера</div>
+        </div>
+
+        
+        <div class="eco-card wide">
+            <h3>Вредные выбросы CO₂</h3>
+
+            <div class="co2">
+                860 тонн
+                <div class="dot"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 <script>
+
 function updateEco() {
     let aqi = Math.floor(Math.random() * 150);
+    let water = Math.floor(Math.random() * 100);
+
     document.getElementById("aqi").innerText = aqi;
-
-    if (aqi < 50) {
-        document.getElementById("status").innerText = "Хороший";
-    } else if (aqi < 100) {
-        document.getElementById("status").innerText = "Средний";
-    } else {
-        document.getElementById("status").innerText = "Плохой";
-    }
-
-    document.getElementById("water").innerText = Math.floor(Math.random() * 100);
+    document.getElementById("water").innerText = water;
 }
+
+
+const ctx = document.getElementById('pieChart');
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Автотранспорт',
+            'Промышленность',
+            'Строительство',
+            'Частный сектор',
+            'Прочее'
+        ],
+        datasets: [{
+            data: [45, 25, 15, 10, 5],
+            backgroundColor: [
+                '#4c47a3',
+                '#ffb300',
+                '#00c853',
+                '#00e5ff',
+                '#999'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                position: 'right'
+            }
+        }
+    }
+});
 </script>
 
 </body>

@@ -1,80 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Панель акима</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Обратная связь</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<div class="container page">
 
-<h1>Almaty Monitoring</h1>
+<div class="sidebar">
+    <h2>Almaty Monitoring</h2>
 
-<div class="menu">
-<a href="dashboard.html">Главная</a>
-<a href="ecology.html">Экология</a>
-<a href="transport.html">Транспорт</a>
-<a href="feedback.html">Обратная связь</a>
+    <a href="dashboard.html">Главная</a>
+    <a href="ecology.html">Экология</a>
+    <a href="transport.html">Транспорт</a>
+    <a href="feedback.html" class="active">Обратная связь</a>
 </div>
-<h1>Заявления по районам Алматы</h1>
 
-<div id="container"></div>
+<div class="main">
 
-<script>
-const districts = [
-  "Алатауский район",
-  "Алмалинский район",
-  "Ауэзовский район",
-  "Бостандыкский район",
-  "Жетысуский район",
-  "Медеуский район",
-  "Наурызбайский район",
-  "Турксибский район"
-];
+   
+    <div class="header big-header">
+        <h1>Almaty Monitoring</h1>
 
-async function loadRequests() {
-  const res = await fetch("http://localhost:3000/requests", {
-    headers: { "Authorization": "admin123" }
-  });
+        <div class="profile">
+            <div class="avatar"></div>
+            <div>
+                <div class="name">Д.А.Сатыбалды</div>
+                <div class="sub">Личный кабинет</div>
+            </div>
+        </div>
+    </div>
 
-  const data = await res.json();
-  const container = document.getElementById("container");
+    
+    <div class="feedback">
 
-  container.innerHTML = "";
+     
+        <div class="district">
+            <div class="district-header">
+                <h2>Ауэзовский район</h2>
+                <span>Заявлений: 45 (15%)</span>
+            </div>
 
-  districts.forEach(district => {
-    const filtered = data.filter(r => r.district === district);
+            <div class="bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
 
-    const block = document.createElement("div");
+    
+        <div class="district">
+            <div class="district-header">
+                <h2>Медеуский район</h2>
+                <span>Заявлений: 40 (14%)</span>
+            </div>
 
-    const title = document.createElement("h2");
-    title.textContent = district + " — Заявлений: " + filtered.length;
+            <div class="bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
 
-    block.appendChild(title);
+    </div>
 
-    if (filtered.length === 0) {
-      const empty = document.createElement("p");
-      empty.textContent = "Нет заявлений";
-      block.appendChild(empty);
-    }
-
-    filtered.forEach(req => {
-      const p = document.createElement("p");
-      p.innerHTML = `
-        <b>${req.name}</b><br>
-        Тип: ${req.type}<br>
-        ${req.message}<br>
-        <small>${req.date}</small>
-      `;
-      block.appendChild(p);
-    });
-
-    container.appendChild(block);
-  });
-}
-
-loadRequests();
-</script>
+</div>
 
 </body>
 </html>
