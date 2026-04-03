@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Вход в аккаунт акима</title>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>Вход в систему акимата</h2>
+
+<input type="text" id="login" placeholder="Логин">
+
+<input type="password" id="password" placeholder="Пароль">
+
+<button onclick="login()">Войти</button>
+
+<p class="error" id="error"></p>
+
+</div>
+
+<script>
+
+function login(){
+
+let login = document.getElementById("login").value;
+let password = document.getElementById("password").value;
+
+if(login === "akim" && password === "12345"){
+    
+    alert("Добро пожаловать, аким!");
+    window.location.href = "dashboard.html";
+
+}else{
+    
+    document.getElementById("error").innerText = "Неверный логин или пароль";
+}
+
+}
+
+</script>
+
+</body>
+</html>

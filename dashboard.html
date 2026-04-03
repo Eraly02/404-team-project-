@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Almaty Monitoring</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>Almaty Monitoring</h1>
+<p><b>Д.А.Сатыбалды</b> | Личный кабинет</p>
+<hr>
+<h3>Меню</h3>
+<ul>
+<li><a href="dashboard.html">Главная</a></li>
+<li><a href="ecology.html">Экология</a></li>
+<li><a href="transport.html">Транспорт</a></li>
+<li><a href="feedback.html">Обратная связь</a></li>
+</ul>
+
+<hr>
+<h2>Индекс качества воздуха (AQI)</h2>
+<p>102</p>
+
+<h2>Выбросы CO₂</h2>
+<p>860 тонн</p>
+
+<h2>Температура</h2>
+<canvas id="tempChart" width="400" height="200"></canvas>
+
+<h2>Влажность</h2>
+<canvas id="humidityChart" width="400" height="200"></canvas>
+
+<h2>Жалобы и предложения</h2>
+<canvas id="pieChart" width="400" height="200"></canvas>
+
+<h2>Загруженность дорог</h2>
+<progress value="70" max="100"></progress>
+<p>70%</p>
+
+<hr>
+
+<h2>Актуальные новости города</h2>
+
+<p>Электросамокаты в Алматы: новые правила парковки</p>
+<p>Жители города жалуются на смог</p>
+<p>Запущена новая велодорожка</p>
+
+<hr>
+
+<h2>AI Ассистент</h2>
+
+<div id="chat">
+<p><b>Ассистент:</b> Добрый день! Чем могу помочь?</p>
+</div>
+
+<input id="input" placeholder="Введите текст..." onkeydown="if(event.key==='Enter')send()">
+<button onclick="send()">Отправить</button>
+
+<script>
+
+new Chart(document.getElementById('tempChart'), {
+    type: 'line',
+    data: {
+        labels: ['29.03','30.03','31.03','01.04','02.04','03.04','04.04'],
+        datasets: [{
+            label: 'Температура °C',
+            data: [20, 22, 19, 23, 24, 25, 23]
+        }]
+    }
+});
+
+new Chart(document.getElementById('humidityChart'), {
+    type: 'line',
+    data: {
+        labels: ['29.03','30.03','31.03','01.04','02.04','03.04','04.04'],
+        datasets: [{
+            label: 'Влажность %',
+            data: [40, 45, 43, 50, 47, 46, 48]
+        }]
+    }
+});
+
+new Chart(document.getElementById('pieChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Ауэзовский','Медеуский','Бостандыкский','Алмалинский','Жетысуский','Турксибский','Алатауский','Наурызбайский'],
+        datasets: [{
+            data: [15, 14, 8, 9,14,10,18,12]
+        }]
+    }
+});
+
+function send(){
+    let input = document.getElementById('input');
+    let chat = document.getElementById('chat');
+
+    if(input.value.trim() !== ""){
+        chat.innerHTML += "<p><b>Вы:</b> " + input.value + "</p>";
+        chat.innerHTML += "<p><b>Ассистент:</b> Информация принята.</p>";
+        input.value = "";
+    }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Жалоба в акимат</title>
+<script src="script.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Подача жалобы</h2>
+
+<form>
+
+<label>Тип обращения</label>
+<select>
+<option>Анонимная</option>
+<option>Не анонимная</option>
+</select>
+
+<label>Категория</label>
+<select>
+<option>Экология</option>
+<option>Транспорт</option>
+<option>Дороги</option>
+<option>Освещение</option>
+<option>Мусор</option>
+</select>
+
+<label>Район</label>
+<select>
+<option>Алмалинский район</option>
+<option>Ауэзовский район</option>
+<option>Бостандыкский район</option>
+<option>Жетысуский район</option>
+<option>Медеуский район</option>
+<option>Наурызбайский район</option>
+<option>Турксибский район</option>
+<option>Алатауский район</option>
+</select>
+
+<label>Точный адрес</label>
+<input type="text" placeholder="Например: ул. Абая 25">
+
+<label>Описание проблемы</label>
+<textarea placeholder="Опишите проблему..."></textarea>
+
+<label>Фото проблемы</label>
+<input type="file">
+
+<label>Контакт (если не анонимно)</label>
+<input type="text" placeholder="Телефон или Email">
+
+<button type="button" onclick="openPopup()">Отправить</button>
+
+</form>
+
+</div>
+
+</body>
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <h3>Спасибо!</h3>
+        <p>Спасибо, что помогаете улучшать город!</p>
+        <button onclick="closePopup()">Закрыть</button>
+    </div>
+</div>
+</html>
