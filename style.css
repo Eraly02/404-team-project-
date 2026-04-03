@@ -202,3 +202,138 @@ canvas {
     border-radius: 10px;
     margin-bottom: 10px;
 }
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f3f4f8;
+}
+
+
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: linear-gradient(180deg, #5a54c4, #6c63ff);
+    color: white;
+    padding: 30px 20px;
+    position: fixed;
+}
+
+.sidebar h2 {
+    margin-bottom: 40px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background: rgb(255, 255, 255);
+}
+
+.main {
+    margin-left: 220px;
+    padding: 20px 30px;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #5a54c4, #6c63ff);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.header .user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+
+.card.blue {
+    background: linear-gradient(135deg, #5a54c4, #6c63ff);
+    color: white;
+}
+
+.card.green {
+    background: linear-gradient(135deg, #00c853, #69f0ae);
+    color: black;
+}
+
+.card.orange {
+    background: linear-gradient(135deg, #ffb300, #ffd54f);
+}
+
+.big {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.chart {
+    width: 100%;
+    height: 200px;
+}
+
+.map {
+    grid-column: span 3;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.news-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.news-item img {
+    width: 120px;
+    border-radius: 10px;
+}
+
+.chat {
+    position: fixed;
+    right: 20px;
+    top: 120px;
+    width: 280px;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.chat input {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.sidebar {
+    left: 0;
+    top: 0;
+}

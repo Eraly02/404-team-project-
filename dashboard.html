@@ -9,142 +9,101 @@
     </head>
     <body>
 
-    <div class="container page">
+  
+<div class="sidebar">
+    <h2>Almaty Monitoring</h2>
 
-    <h1>Almaty Monitoring</h1>
-    <p><b>Д.А.Сатыбалды</b> | Личный кабинет</p>
-
-    <div class="menu">
     <a href="dashboard.html">Главная</a>
     <a href="ecology.html">Экология</a>
     <a href="transport.html">Транспорт</a>
     <a href="feedback.html">Обратная связь</a>
-    </div>
-    <hr>
-    <div class="block">
-    <h2>Индекс качества воздуха (AQI)</h2>
-    <p>102</p>
-    </div>
-
-    <div class="block">
-    <h2>Выбросы CO₂</h2>
-    <p>860 тонн</p>
-    </div>
-    <div class="block">
-    <h2>Температура</h2>
-    <canvas id="tempChart" width="400" height="200"></canvas>
-    </div>
-<div class="block">
-    <h2>Влажность</h2>
-    <canvas id="humidityChart" width="400" height="200"></canvas>
-    </div>
-<div class="block">
-    <h2>Жалобы и предложения</h2>
-    <canvas id="pieChart" width="400" height="200"></canvas>
-    </div>
-<div class="block">
-    <h2>Загруженность дорог</h2>
-    <progress value="70" max="100"></progress>
-    <p>70%</p>
 </div>
-    <hr>
-<div class="block">
-    <h2>Актуальные новости города</h2>
 
-    <div>
 
-    <img src="images/bus.jpg" alt="Электросамокаты в Алматы" width="250">
+<div class="main">
 
-    <h3>Схемы движения популярных автобусных маршрутов изменят в Алматы</h3>
-
-    <a href="https://tengrinews.kz/news/shemyi-dvijeniya-populyarnyih-avtobusnyih-marshrutov-596230/">Читать статью</a>
-
-    </div>
-    <br>
-
-    <!-- Новость 2 -->
-    <div>
-
-    <img src="images/police.jpg" alt="Спецоперация" width="250">
-
-    <h3>Масштабная операция в Алматы - более 2 тысяч авто забрали на штрафстоянку</h3>
-
-    <a href="https://tengrinews.kz/autonews/masshtabnaya-operatsiya-almatyi-2-tyisyach-avto-zabrali-596196/">Читать статью</a>
-
+    <div class="header">
+        <h1>Almaty Monitoring</h1>
+        <div class="user">Д.А.Сатыбалды</div>
     </div>
 
-    <br>
 
-    <!-- Новость 3 -->
-    <div>
+    <div class="grid">
 
-    <img src="images/pogoda.jpg" alt="Погода" width="250">
+    
+        <div class="card blue">
+            <p>Индекс AQI</p>
+            <div class="big">102</div>
+        </div>
 
-    <h3>В Астане и Алматы похолодает - прогноз на 3, 4, 5 апреля</h3>
+        <div class="card green">
+            <p>Выбросы CO₂</p>
+            <div class="big">860</div>
+        </div>
 
-    <a href="https://tengrinews.kz/kazakhstan_news/v-astane-i-almatyi-poholodaet-prognoz-na-3-4-5-aprelya-596156/">Читать статью</a>
+        <div class="card orange">
+            <p>Загруженность</p>
+            <div class="big">70%</div>
+        </div>
 
-    </div>
+       
+        <div class="card">
+            <h3>Температура</h3>
+            <canvas id="tempChart" class="chart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Влажность</h3>
+            <canvas id="humidityChart" class="chart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Жалобы</h3>
+            <canvas id="pieChart" class="chart"></canvas>
+        </div>
+
+       
+        <div class="card map">
+            <h3>Новости</h3>
+
+            <div class="news-item">
+                <img src="images/bus.jpg">
+                <div>
+                    <p>Изменение маршрутов</p>
+                    <a href="#">Читать</a>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <img src="images/police.jpg">
+                <div>
+                    <p>Операция полиции</p>
+                    <a href="#">Читать</a>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <img src="images/pogoda.jpg">
+                <div>
+                    <p>Прогноз погоды</p>
+                    <a href="#">Читать</a>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 </div>
-    <hr>
 
-    <h2>AI Ассистент</h2>
+
+<div class="chat">
+    <p><b>AI Assistant</b></p>
 
     <div id="chat">
-    <p><b>Ассистент:</b> Добрый день! Чем могу помочь?</p>
+        <p>Привет, чем помочь?</p>
     </div>
 
     <input id="input" placeholder="Введите текст..." onkeydown="if(event.key==='Enter')send()">
-    <button onclick="send()">Отправить</button>
-
-    <script>
-
-    new Chart(document.getElementById('tempChart'), {
-        type: 'line',
-        data: {
-            labels: ['29.03','30.03','31.03','01.04','02.04','03.04','04.04'],
-            datasets: [{
-                label: 'Температура °C',
-                data: [20, 22, 19, 23, 24, 25, 23]
-            }]
-        }
-    });
-
-    new Chart(document.getElementById('humidityChart'), {
-        type: 'line',
-        data: {
-            labels: ['29.03','30.03','31.03','01.04','02.04','03.04','04.04'],
-            datasets: [{
-                label: 'Влажность %',
-                data: [40, 45, 43, 50, 47, 46, 48]
-            }]
-        }
-    });
-
-    new Chart(document.getElementById('pieChart'), {
-        type: 'doughnut',
-        data: {
-            labels: ['Ауэзовский','Медеуский','Бостандыкский','Алмалинский','Жетысуский','Турксибский','Алатауский','Наурызбайский'],
-            datasets: [{
-                data: [15, 14, 8, 9,14,10,18,12]
-            }]
-        }
-    });
-
-    function send(){
-        let input = document.getElementById('input');
-        let chat = document.getElementById('chat');
-
-        if(input.value.trim() !== ""){
-            chat.innerHTML += "<p><b>Вы:</b> " + input.value + "</p>";
-            chat.innerHTML += "<p><b>Ассистент:</b> Информация принята.</p>";
-            input.value = "";
-        }
-    }
-
-    </script>
-
+</div>
     </body>
     </html>
