@@ -1,24 +1,46 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Экология</title>
+    <title>Экология</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1>Экология Алматы</h1>
+<div class="container page">
 
-<ul>
-<li><a href="dashboard.html">Главная</a></li>
-<li><a href="ecology.html">Экология</a></li>
-<li><a href="transport.html">Транспорт</a></li>
-<li><a href="feedback.html">Обратная связь</a></li>
-</ul>
+<h1>Almaty Monitoring</h1>
 
-<hr>
+<div class="menu">
+<a href="dashboard.html">Главная</a>
+<a href="ecology.html">Экология</a>
+<a href="transport.html">Транспорт</a>
+<a href="feedback.html">Обратная связь</a>
+</div>
 
-<p>Данные по качеству воздуха и выбросам CO₂</p>
+<h1>Экология</h1>
+
+<p>Качество воды: <span id="water">78</span>%</p>
+<p>AQI: <span id="aqi">42</span></p>
+<p>Статус: <span id="status">Хороший</span></p>
+
+<button onclick="updateEco()">Обновить</button>
+
+<script>
+function updateEco() {
+    let aqi = Math.floor(Math.random() * 150);
+    document.getElementById("aqi").innerText = aqi;
+
+    if (aqi < 50) {
+        document.getElementById("status").innerText = "Хороший";
+    } else if (aqi < 100) {
+        document.getElementById("status").innerText = "Средний";
+    } else {
+        document.getElementById("status").innerText = "Плохой";
+    }
+
+    document.getElementById("water").innerText = Math.floor(Math.random() * 100);
+}
+</script>
 
 </body>
 </html>

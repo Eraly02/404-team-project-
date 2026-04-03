@@ -1,10 +1,80 @@
-<h1>Обратная связь</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Панель акима</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container page">
 
-<ul>
-<li><a href="dashboard.html">Главная</a></li>
-<li><a href="ecology.html">Экология</a></li>
-<li><a href="transport.html">Транспорт</a></li>
-<li><a href="feedback.html">Обратная связь</a></li>
-</ul>
+<h1>Almaty Monitoring</h1>
 
-<p>Здесь можно отправить жалобу или предложение.</p>
+<div class="menu">
+<a href="dashboard.html">Главная</a>
+<a href="ecology.html">Экология</a>
+<a href="transport.html">Транспорт</a>
+<a href="feedback.html">Обратная связь</a>
+</div>
+<h1>Заявления по районам Алматы</h1>
+
+<div id="container"></div>
+
+<script>
+const districts = [
+  "Алатауский район",
+  "Алмалинский район",
+  "Ауэзовский район",
+  "Бостандыкский район",
+  "Жетысуский район",
+  "Медеуский район",
+  "Наурызбайский район",
+  "Турксибский район"
+];
+
+async function loadRequests() {
+  const res = await fetch("http://localhost:3000/requests", {
+    headers: { "Authorization": "admin123" }
+  });
+
+  const data = await res.json();
+  const container = document.getElementById("container");
+
+  container.innerHTML = "";
+
+  districts.forEach(district => {
+    const filtered = data.filter(r => r.district === district);
+
+    const block = document.createElement("div");
+
+    const title = document.createElement("h2");
+    title.textContent = district + " — Заявлений: " + filtered.length;
+
+    block.appendChild(title);
+
+    if (filtered.length === 0) {
+      const empty = document.createElement("p");
+      empty.textContent = "Нет заявлений";
+      block.appendChild(empty);
+    }
+
+    filtered.forEach(req => {
+      const p = document.createElement("p");
+      p.innerHTML = `
+        <b>${req.name}</b><br>
+        Тип: ${req.type}<br>
+        ${req.message}<br>
+        <small>${req.date}</small>
+      `;
+      block.appendChild(p);
+    });
+
+    container.appendChild(block);
+  });
+}
+
+loadRequests();
+</script>
+
+</body>
+</html>

@@ -15,14 +15,35 @@ body {
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    width: 350px;
+    width: 400px;
+    align-self: center;
+    
+}
+.login-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    align-items: center;
+}
+
+.login-box input {
+    width: 100%;
+}
+
+.login-box button {
+    width: 100%;
+    max-width: 200px;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 h1, h2 {
     text-align: center;
     color: #5a54c4;
     margin-bottom: 25px;
-    font-size: 18px;
 }
 
 form {
@@ -69,12 +90,16 @@ button, .btn {
     box-shadow: 0 10px 25px rgba(108, 99, 255, 0.4);
 }
 
+.btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
 
 button:hover, .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 35px rgba(108, 99, 255, 0.6);
 }
-
 
 button:active {
     transform: scale(0.97);
@@ -85,7 +110,6 @@ button:active {
     text-align: center;
     margin-top: 10px;
 }
-
 
 .popup {
     display: none;
@@ -107,6 +131,7 @@ button:active {
     animation: fadeIn 0.3s ease;
 }
 
+/* АНИМАЦИЯ */
 @keyframes fadeIn {
     from {
         transform: scale(0.8);
@@ -116,4 +141,64 @@ button:active {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+
+/* ===== DASHBOARD СТРАНИЦЫ ===== */
+
+.page {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.menu {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.7);
+    color: #5a54c4;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.menu a:hover {
+    background: #6c63ff;
+    color: white;
+}
+
+.block {
+    background: rgba(255,255,255,0.5);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+canvas {
+    width: 100% !important;
+}
+
+.news {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.news img {
+    border-radius: 10px;
+}
+
+#chat {
+    height: 150px;
+    overflow-y: auto;
+    background: rgba(255,255,255,0.7);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }

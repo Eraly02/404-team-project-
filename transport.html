@@ -1,10 +1,37 @@
-<h1>Транспорт Алматы</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Транспорт</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<ul>
-<li><a href="dashboard.html">Главная</a></li>
-<li><a href="ecology.html">Экология</a></li>
-<li><a href="transport.html">Транспорт</a></li>
-<li><a href="feedback.html">Обратная связь</a></li>
-</ul>
+<div class="container page">
 
-<p>Загруженность дорог и общественный транспорт</p>
+<h1>Almaty Monitoring</h1>
+
+<div class="menu">
+<a href="dashboard.html">Главная</a>
+<a href="ecology.html">Экология</a>
+<a href="transport.html">Транспорт</a>
+<a href="feedback.html">Обратная связь</a>
+</div>
+
+<h1>Дорожная ситуация</h1>
+
+<p>ДТП за сутки: <span id="dtp">124</span></p>
+<p>Пробки: <span id="traffic">4</span>/10</p>
+<p>Выбросы CO2: <span id="co2">860</span></p>
+
+<button onclick="updateData()">Обновить</button>
+
+<script>
+function updateData() {
+    document.getElementById("dtp").innerText = Math.floor(Math.random() * 200);
+    document.getElementById("traffic").innerText = Math.floor(Math.random() * 10);
+    document.getElementById("co2").innerText = Math.floor(Math.random() * 1000);
+}
+</script>
+
+</body>
+</html>
