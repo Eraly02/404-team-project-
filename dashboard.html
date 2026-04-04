@@ -41,17 +41,17 @@
 
         <div class="card blue">
             <p>Индекс AQI</p>
-            <div class="big">102</div>
+            <div class="big" id="aqi">102</div>
         </div>
 
         <div class="card green">
             <p>Выбросы CO₂</p>
-            <div class="big">860</div>
+            <div class="big" id="co2">860</div>
         </div>
 
         <div class="card orange">
             <p>Загруженность</p>
-            <div class="big">70%</div>
+            <div class="big" id="traffic">70%</div>
         </div>
 
         <div class="card">
@@ -99,8 +99,11 @@
     <input id="input" placeholder="Введите текст..." onkeydown="if(event.key==='Enter')send()">
 </div>
 
+
 <script>
-function send(){
+
+async function send(){
+
     let input = document.getElementById("input");
     let chat = document.getElementById("chat");
 
@@ -110,12 +113,47 @@ function send(){
 
     chat.innerHTML += "<p><b>Вы:</b> " + msg + "</p>";
 
-    let reply = "Данные обновлены 📊";
-    chat.innerHTML += "<p><b>AI:</b> " + reply + "</p>";
-
     input.value = "";
+
+    let aqi = document.getElementById("aqi").innerText;
+    let co2 = document.getElementById("co2").innerText;
+    let traffic = document.getElementById("traffic").innerText;
+
+    try{
+
+        let response = await fetch("http://127.0.0.1:8000/chat", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                message: msg,
+                aqi: parseInt(aqi),
+                co2: parseInt(co2),
+                traffic: traffic
+            })
+
+        });
+
+        let data = await response.json();
+
+        chat.innerHTML += "<p><b>AI:</b><br>" + data.reply.replace(/\n/g,"<br>") + "</p>";
+
+        chat.scrollTop = chat.scrollHeight;
+
+    }catch(e){
+
+        chat.innerHTML += "<p><b>AI:</b> Ошибка соединения с AI</p>";
+
+    }
+
 }
+
 </script>
+
 
 <script>
 
@@ -130,7 +168,6 @@ new Chart(document.getElementById("tempChart"), {
         }]
     }
 });
-
 
 new Chart(document.getElementById("humidityChart"), {
     type: 'line',
@@ -147,13 +184,14 @@ new Chart(document.getElementById("humidityChart"), {
 new Chart(document.getElementById("pieChart"), {
     type: 'doughnut',
     data: {
-        labels: ["Ауэзовский","","Медеуский","Бостандыкский","Алмалинский","Жетысуский","Турксибский","Алатауский","Наурызбайский"],
+        labels: ["Ауэзовский","Медеуский","Бостандыкский","Алмалинский","Жетысуский","Турксибский","Алатауский","Наурызбайский"],
         datasets: [{
             data: [15,14,8,9,14,10,18,12],
             backgroundColor: ["#4c47a3","#ff9800","#f44336","#9e9e9e"]
         }]
     }
 });
+
 </script>
 
 </body>
