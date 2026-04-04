@@ -82,3 +82,39 @@ Complaint:
     return {
         "reply": result.strip()
     }
+    from fastapi.responses import FileResponse
+
+
+@app.get("/")
+def home():
+    return FileResponse("glavnaya.html")
+
+
+@app.get("/dashboard")
+def dashboard():
+    return FileResponse("dashboard.html")
+
+
+@app.get("/ecology")
+def ecology():
+    return FileResponse("ecology.html")
+
+
+@app.get("/feedback")
+def feedback():
+    return FileResponse("feedback.html")
+
+
+@app.get("/podacha")
+def podacha():
+    return FileResponse("podacha.html")
+
+
+@app.get("/rega")
+def rega():
+    return FileResponse("rega.html")
+
+
+@app.get("/transport")
+def transport():
+    return FileResponse("transport.html")
